@@ -114,9 +114,14 @@ public class PlayerMovement : MonoBehaviour
 
         foreach(Collider enemy in hitEnemies){
             Debug.Log("Hit!");
+            enemy.GetComponent<EnemyHealth>().TakeDamage(34);
         }
 
         yield return new WaitForSeconds(1.9f);
         //anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
+    }
+
+    void OnDrawGizmosSelected(){
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
