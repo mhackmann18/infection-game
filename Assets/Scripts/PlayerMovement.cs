@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
+    public PlayerHealth playerHealth;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -111,6 +113,10 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Attack");
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+        if(hitEnemies.Length > 0){
+            playerHealth.TakeDamage(5);
+        }
 
         foreach(Collider enemy in hitEnemies){
             Debug.Log("Hit!");
