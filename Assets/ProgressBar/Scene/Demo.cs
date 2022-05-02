@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Demo : MonoBehaviour {
 
-    public ProgressBar Pb;
-    public ProgressBarCircle PbC;
+    public EnemyHealthBar Pb;
 
     private void Start()
     {
         Pb.BarValue = 50;
-        PbC.BarValue = 50;
     }
 
     void FixedUpdate () {
@@ -18,13 +16,11 @@ public class Demo : MonoBehaviour {
         if(Input.GetKey(KeyCode.KeypadPlus))
         {
             Pb.BarValue += 1;
-            PbC.BarValue += 1;
         }
 
         if (Input.GetKey(KeyCode.KeypadMinus))
         {
             Pb.BarValue -= 1;
-            PbC.BarValue -= 1;
         }
     }
 }
