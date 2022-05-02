@@ -20,7 +20,13 @@ public class PlayerMovement : MonoBehaviour
 
     // References
     private CharacterController controller;
-    private Animator anim;
+    public Animator anim;
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+
+    public PlayerHealth playerHealth;
 
     private void Start()
     {
@@ -103,10 +109,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator Attack(){
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
+        //anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
 
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+        if(hitEnemies.Length > 0){
+            playerHealth.TakeDamage(5);
+        }
+
+        foreach(Collider enemy in hitEnemies){
+            Debug.Log("Hit!");
+            enemy.GetComponent<EnemyHealth>().TakeDamage(34);
+        }
+
         yield return new WaitForSeconds(1.9f);
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
+        //anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
+    }
+
+    void OnDrawGizmosSelected(){
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
