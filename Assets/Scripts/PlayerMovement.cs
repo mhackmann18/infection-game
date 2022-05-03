@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator Attack(){
-        //anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
+        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -123,8 +123,8 @@ public class PlayerMovement : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage(34);
         }
 
-        yield return new WaitForSeconds(1.9f);
-        //anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
+        yield return new WaitForSeconds(1.0f);
+        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
     }
 
     void OnDrawGizmosSelected(){
