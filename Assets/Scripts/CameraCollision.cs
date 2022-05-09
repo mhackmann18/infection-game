@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraCollision : MonoBehaviour
 {
     public float minDistance = 1f;
-    public float maxDistnce = 4f;
+    public float maxDistance = 4f;
     public float smooth = 10f;
     Vector3 dollyDir;
     public Vector3 dollyDirAdjusted;
@@ -20,15 +20,15 @@ public class CameraCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 desiredCameraPosition = transform.parent.TransformPoint(dollyDir * maxDistnce);
+        Vector3 desiredCameraPosition = transform.parent.TransformPoint(dollyDir * maxDistance);
         RaycastHit hit;
 
         if(Physics.Linecast(transform.parent.position, desiredCameraPosition, out hit)){
-            distance = Mathf.Clamp(hit.distance * .9f, minDistance, maxDistnce);
+            distance = Mathf.Clamp(hit.distance * .9f, minDistance, maxDistance);
         } else {
-            distance = maxDistnce;
+            distance = maxDistance;
         }
 
-        transform.position = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
     }
 }
