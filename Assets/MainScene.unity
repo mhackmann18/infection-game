@@ -2473,6 +2473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1694776165}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!195 &2037757500
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2492,7 +2495,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &2037757501
@@ -2533,7 +2536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037757498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.232, y: 0, z: 0}
+  m_LocalPosition: {x: -2.232, y: 0, z: -13.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
