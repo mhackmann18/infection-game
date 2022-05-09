@@ -46,6 +46,7 @@ public class CameraFollow : MonoBehaviour
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
 
         transform.rotation = localRotation;
+        PlayerObj.transform.rotation = Quaternion.Euler(0, rotY, 0.0f);
     }
 
     void LateUpdate()

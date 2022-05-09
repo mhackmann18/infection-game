@@ -453,7 +453,7 @@ MonoBehaviour:
   clampAngle: 80
   inputSensitivity: 150
   CamerObj: {fileID: 0}
-  PlayerObj: {fileID: 0}
+  PlayerObj: {fileID: 1694776161}
   camDistanceXToPlayer: 10
   camDistanceYToPlayer: 5
   camDistanceZToPlayer: 5
