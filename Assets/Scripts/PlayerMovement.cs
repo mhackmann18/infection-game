@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerHealth playerHealth;
 
+    // Jumping
+    // private bool isJumping;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -36,11 +39,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
         Move();
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             StartCoroutine(Attack());
+        }
+
+        if(isGrounded){
+            anim.SetBool("IsFalling", false);
+            anim.SetBool("IsGrounded", true);
+            anim.SetBool("IsJumping", false);
+        } else {
+            anim.SetBool("IsGrounded", false);
+            if(velocity.y < 0){
+                anim.SetBool("IsFalling", true);
+            }
         }
     }
 
@@ -51,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+            anim.SetBool("IsGrounded", true);
         }
 
         float moveZ = Input.GetAxis("Vertical");
@@ -73,12 +89,20 @@ public class PlayerMovement : MonoBehaviour
                 Idle();
             }
 
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName("Landing")){
+                moveSpeed = 0;
+            }
+
             moveDirection *= moveSpeed;
 
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetKeyDown(KeyCode.Space) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Landing")){
                 Jump();
             }
+        } else {
+            // If player is airborne reduce speed 
+            moveDirection *= (moveSpeed * .75f);
         }
+
 
         controller.Move(moveDirection * Time.deltaTime);
 
@@ -105,6 +129,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        anim.SetBool("IsJumping", true);
+        // isJumping = true;
+        isGrounded = false;
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
 

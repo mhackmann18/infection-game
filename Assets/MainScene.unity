@@ -451,7 +451,7 @@ MonoBehaviour:
   cameraMoveSpeed: 120
   CameraFollowObject: {fileID: 1263804796}
   clampAngle: 80
-  inputSensitivity: 150
+  inputSensitivity: 250
   CamerObj: {fileID: 0}
   PlayerObj: {fileID: 1694776161}
   camDistanceXToPlayer: 10
@@ -2091,7 +2091,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  gravity: -9.81
+  gravity: -15.81
   jumpHeight: 1.5
   anim: {fileID: 0}
   attackPoint: {fileID: 2046812722}
