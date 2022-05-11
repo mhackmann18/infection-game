@@ -75,7 +75,11 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);
         
         if(isGrounded){
-                if(moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
+            if(moveDirection != Vector3.zero && moveDirection.z < 0){
+                moveSpeed = walkSpeed * .8f;
+                anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+            }
+                else if(moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
             {
                 // Walk
                 Walk();
@@ -112,13 +116,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Idle()
     {
-        anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+        anim.SetFloat("Speed", .33f, 0.1f, Time.deltaTime);
     }
 
     private void Walk()
     {
         moveSpeed = walkSpeed;
-        anim.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+        anim.SetFloat("Speed", 0.66f, 0.1f, Time.deltaTime);
     }
 
     private void Run()
