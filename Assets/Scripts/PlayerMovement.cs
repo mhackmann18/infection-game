@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);
         
         if(isGrounded){
-            if(moveDirection != Vector3.zero && moveDirection.z < 0){
+            if(moveDirection != Vector3.zero && Vector3.Dot(transform.forward, moveDirection) < 0){
                 moveSpeed = walkSpeed * .8f;
                 anim.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
             }
