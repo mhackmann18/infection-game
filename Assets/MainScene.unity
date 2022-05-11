@@ -2778,7 +2778,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   radius: 10
-  angle: 100
+  angle: 130
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
@@ -2787,6 +2787,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   canSeePlayer: 0
+  detectedPlayer: 0
 --- !u!195 &2037757500
 NavMeshAgent:
   m_ObjectHideFlags: 0
