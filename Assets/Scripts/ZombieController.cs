@@ -76,15 +76,14 @@ public class ZombieController : MonoBehaviour
         if(canSeePlayer){
             detectedPlayer = true;
         } 
-        if(detectedPlayer){
-            MoveToTarget();
-        }
+        
+        MoveToTarget();
     }
 
     private void MoveToTarget()
     {
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if(distanceToTarget < 10){
+        if(distanceToTarget < 15 && detectedPlayer || distanceToTarget < 2){
             // Zombie stays in place during attack animation
             if(Time.time < timeOfLastAttack + attackSpeed && Time.time > attackSpeed){
                 agent.isStopped = true;
@@ -116,9 +115,9 @@ public class ZombieController : MonoBehaviour
 
     private void RotateToTarget()
     {
-        // transform.LookAt(target);
-
-        Vector3 direction = target.position - transform.position;
+        transform.LookAt(target);
+        Vector3 targetGroundedPosition = new Vector3(target.position.x, 0 ,target.position.z);
+        Vector3 direction = targetGroundedPosition - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation; 
     }
