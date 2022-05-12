@@ -39,9 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
+        if(pauseMenu.GameIsPaused){return;}
         Move();
-
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             StartCoroutine(Attack());
