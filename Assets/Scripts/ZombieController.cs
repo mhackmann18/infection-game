@@ -10,6 +10,10 @@ public class ZombieController : MonoBehaviour
     private NavMeshAgent agent = null;
     private Animator anim = null;
 
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+
     [SerializeField] private Transform target;
     [SerializeField] private LayerMask groundMask;
 
@@ -125,11 +129,28 @@ public class ZombieController : MonoBehaviour
     private void AttackTarget()
     {
         anim.SetTrigger("attack");
+        AttackCalculation();
+    }
+
+    private void AttackCalculation(){
+        Debug.Log("Attack!");
+        anim.SetTrigger("attack");
+
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+        foreach(Collider enemy in hitEnemies){
+            Debug.Log("Hit!");
+            enemy.GetComponent<PlayerHealth>().TakeDamage(10);
+        }
     }
 
     private void GetReferences()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+    }
+
+    void OnDrawGizmosSelected(){
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
