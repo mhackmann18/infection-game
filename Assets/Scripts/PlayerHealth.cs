@@ -23,8 +23,10 @@ public class PlayerHealth : MonoBehaviour
 
         // Player loses if their health drops to 0
         if(currentHealth <= 0){
-            Debug.Log("You Lose");
+            GlobalVars.enemiesRemaining = 0;
             SceneManager.LoadScene("LoseScreen");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }

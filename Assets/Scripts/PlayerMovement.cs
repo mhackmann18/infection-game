@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
-    private float attackTime = 2.08f;
+    private float attackTime = 1.58f;
     private float timeOfLastAttack = 0;
 
     public PlayerHealth playerHealth;

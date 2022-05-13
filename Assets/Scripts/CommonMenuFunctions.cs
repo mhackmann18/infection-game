@@ -10,6 +10,6 @@ public class CommonMenuFunctions : MonoBehaviour
     }
 
     public void ExitProgram(){
-        Application.Quit();
+        SceneManager.LoadScene("Menu");
     }
 }
