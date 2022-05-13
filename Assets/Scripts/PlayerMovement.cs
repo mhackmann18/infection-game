@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
         // Attack if attack timer is over
-        if(Input.GetKeyDown(KeyCode.Mouse0) && (Time.time >= timeOfLastAttack || Time.time < attackTime))
+        if(Input.GetKeyDown(KeyCode.Mouse0) && (Time.time >= timeOfLastAttack + attackTime || Time.time < attackTime))
         {
             Attack();
         }
