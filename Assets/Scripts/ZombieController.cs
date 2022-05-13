@@ -88,7 +88,10 @@ public class ZombieController : MonoBehaviour
     private void MoveToTarget()
     {
         float distanceToTarget = Vector3.Distance(target.position, transform.position);
+
+        // Move to player if they're in the zombie's FOV and radius
         if(distanceToTarget < 15 && detectedPlayer || distanceToTarget < 2){
+            
             // Zombie stays in place during attack animation
             if(Time.time < timeOfLastAttack + attackSpeed && Time.time > attackSpeed){
                 agent.isStopped = true;
@@ -100,6 +103,7 @@ public class ZombieController : MonoBehaviour
             agent.SetDestination(target.position);
             RotateToTarget();
 
+            // If zombie is close to player try to attack
             if(distanceToTarget <= agent.stoppingDistance)
             {
                 anim.SetFloat("Speed", 0f, 0.2f, Time.deltaTime);
@@ -120,6 +124,7 @@ public class ZombieController : MonoBehaviour
 
     private void RotateToTarget()
     {
+        // Rotate to face player
         transform.LookAt(target);
         Vector3 targetGroundedPosition = new Vector3(target.position.x, 0 ,target.position.z);
         Vector3 direction = targetGroundedPosition - transform.position;
@@ -134,7 +139,6 @@ public class ZombieController : MonoBehaviour
     }
 
     private void AttackCalculation(){
-        Debug.Log("Attack!");
         anim.SetTrigger("attack");
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);

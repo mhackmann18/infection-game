@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float jumpHeight;
 
-    // References
     private CharacterController controller;
     public Animator anim;
 
@@ -30,9 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerHealth playerHealth;
 
-    // Jumping
-    // private bool isJumping;
-
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -42,12 +38,16 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if(pauseMenu.GameIsPaused){return;}
+
         Move();
+
+        // Attack if attack timer is over
         if(Input.GetKeyDown(KeyCode.Mouse0) && (Time.time >= timeOfLastAttack || Time.time < attackTime))
         {
             Attack();
         }
 
+        // Change animator parameters to update animations
         if(isGrounded){
             anim.SetBool("IsFalling", false);
             anim.SetBool("IsGrounded", true);
@@ -64,17 +64,12 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-            anim.SetBool("IsGrounded", true);
-        }
-
         float moveZ = Input.GetAxis("Vertical");
 
         moveDirection = new Vector3(0, 0, moveZ);
         moveDirection = transform.TransformDirection(moveDirection);
         
+        // Only allow movement control when player is grounded
         if(isGrounded){
             if(moveDirection != Vector3.zero && Vector3.Dot(transform.forward, moveDirection) < 0){
                 moveSpeed = walkSpeed * .8f;
@@ -93,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
                 // Idle
                 Idle();
             }
-
+            
+            // Don't let player move when landing animation is active
             if(anim.GetCurrentAnimatorStateInfo(0).IsName("Landing")){
                 moveSpeed = 0;
             }
@@ -104,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
             }
         } else {
-            // If player is airborne reduce speed 
+            // If player is airborne reduce speed slightly
             moveDirection *= (moveSpeed * .75f);
         }
 
@@ -135,12 +131,12 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         anim.SetBool("IsJumping", true);
-        // isJumping = true;
         isGrounded = false;
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
 
     private void Attack(){
+        // Attack cooldown timer
         timeOfLastAttack = Time.time;
         anim.SetTrigger("Attack");
 

@@ -5,17 +5,17 @@ using UnityEngine.UI;
 public class InfectedRemaining : MonoBehaviour
 {
     public Text text;
-    // Start is called before the first frame update
+
     void Start()
     {   
-        text.text = "Enemies Remaining: 10";
+        text.text = "Enemies Remaining: " + GlobalVars.enemiesRemaining.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         text.text = "Enemies Remaining: " + GlobalVars.enemiesRemaining.ToString();
 
+        // Player is taken to victory screen when all zombies are defeated
         if(GlobalVars.enemiesRemaining == 0){
             Debug.Log("You win");
         }

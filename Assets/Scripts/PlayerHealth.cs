@@ -9,7 +9,6 @@ public class PlayerHealth : MonoBehaviour
 
     public ProgressBar healthBar;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
@@ -17,15 +16,11 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int damage){
         currentHealth -= damage;
         healthBar.BarValue = currentHealth;
+
+        // Player loses if their health drops to 0
         if(currentHealth <= 0){
             Debug.Log("You Lose");
         }
