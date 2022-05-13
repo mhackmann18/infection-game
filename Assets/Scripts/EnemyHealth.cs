@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -29,7 +30,12 @@ public class EnemyHealth : MonoBehaviour
         //Die Animation
         GlobalVars.enemiesRemaining -= 1;
         Destroy(gameObject, 0.75f);
-        //Disable
-        
+
+        // Player is taken to victory screen when all zombies are defeated
+        if(GlobalVars.enemiesRemaining == 0){
+            SceneManager.LoadScene("WinScreen");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
