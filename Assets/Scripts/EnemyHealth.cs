@@ -27,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
     void Die(){
         Debug.Log("Enemy has died!");
         //Die Animation
+        GlobalVars.enemiesRemaining -= 1;
         Destroy(gameObject, 0.75f);
         //Disable
         
