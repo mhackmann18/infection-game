@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    private float attackTime = 2.08f;
+    private float timeOfLastAttack = 0;
 
     public PlayerHealth playerHealth;
 
@@ -41,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if(pauseMenu.GameIsPaused){return;}
         Move();
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Mouse0) && (Time.time >= timeOfLastAttack || Time.time < attackTime))
         {
-            StartCoroutine(Attack());
+            Attack();
         }
 
         if(isGrounded){
@@ -138,23 +140,16 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
 
-    private IEnumerator Attack(){
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
+    private void Attack(){
+        timeOfLastAttack = Time.time;
         anim.SetTrigger("Attack");
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
-        if(hitEnemies.Length > 0){
-            playerHealth.TakeDamage(5);
-        }
 
         foreach(Collider enemy in hitEnemies){
             Debug.Log("Hit!");
             enemy.GetComponent<EnemyHealth>().TakeDamage(34);
         }
-
-        yield return new WaitForSeconds(1.0f);
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
     }
 
     void OnDrawGizmosSelected(){
