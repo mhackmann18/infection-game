@@ -145,7 +145,7 @@ public class ZombieController : MonoBehaviour
 
         foreach(Collider enemy in hitEnemies){
             Debug.Log("Hit!");
-            enemy.GetComponent<PlayerHealth>().TakeDamage(10);
+            enemy.GetComponent<PlayerHealth>().TakeDamage(2);
         }
     }
 
