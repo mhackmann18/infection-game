@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InfectedRemaining : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class InfectedRemaining : MonoBehaviour
         // Player is taken to victory screen when all zombies are defeated
         if(GlobalVars.enemiesRemaining == 0){
             Debug.Log("You win");
+            SceneManager.LoadScene("WinScreen");
         }
     }
 }

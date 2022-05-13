@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         // Player loses if their health drops to 0
         if(currentHealth <= 0){
             Debug.Log("You Lose");
+            SceneManager.LoadScene("LoseScreen");
         }
     }
 }
