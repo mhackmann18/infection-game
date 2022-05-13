@@ -70,6 +70,7 @@ public class ZombieController : MonoBehaviour
 
     private void Start()
     {
+        GlobalVars.enemiesRemaining += 1;
         GetReferences();
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
